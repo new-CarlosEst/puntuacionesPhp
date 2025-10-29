@@ -45,7 +45,7 @@
 
         /** 
          * Esta funcion me conectara a mi servidor mysql pero no a la base de datos 
-         * Despues cojera y me ejecutar el sql creando la base de datos
+         * Despues cojera y me ejecutara el sql creando la base de datos indicada en el .sql
          */
         private function cargarSql (){
             try{
@@ -72,6 +72,13 @@
             }
         }
 
+        /**
+         * Funcion para conectarse a la base de datos
+         * Importante hacer esta conexion despues de cargar el script .sql ya que si no dará error 
+         * No encontrara la base de datos en caso de que no existiese
+         * 
+         * @return Devuelve la conexion a la base de datos
+         */
         public function conectarse(){
             try {
                 //Me hago la conexion y pongo los errores
@@ -80,10 +87,17 @@
 
                 //devuelvo esta conexion 
                 return $conexion;
-                
+
             } catch (PDOException $e){
                 echo "Error la conectarser a la base de datos <br/>" . $e;
             }
+        }
+
+        /** 
+         * Funcion que devuelve la conexion a la base de datos
+        */
+        public function getConexion(){
+            return $this->conexion;
         }
     }
 ?>
