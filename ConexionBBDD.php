@@ -50,9 +50,9 @@
         private function cargarSql (){
             try{
                 //me hago una conexion para cargar el sql temporal
-                $conexion = new PDO("mysql:host=". $this->service, $this->user, $this->password);
+                $conexionTemp = new PDO("mysql:host=". $this->service, $this->user, $this->password);
                 //Pongo los errores y excepciones
-                $conexion-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $conexionTemp-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 //Saco la ruta al .sql
                 $archivoSQL = __DIR__ . '/resources/marcador_v2.sql';
@@ -65,7 +65,9 @@
                     //Saco los datos del .sql
                     $contenidoSQL = file_get_contents($archivoSQL);
                     //Ejecuto lo que hay en el sql
-                    $conexion->exec($contenidoSQL);
+                    $conexionTemp->exec($contenidoSQL);
+
+                    $conexionTemp = null;
                 }
             } catch (PDOException $e){
                 echo "Error la conectarser a la base de datos <br/>" . $e;
@@ -98,6 +100,10 @@
         */
         public function getConexion(){
             return $this->conexion;
+        }
+
+        public function cerrarConexion(){
+            $this->conexion = null;
         }
     }
 ?>
