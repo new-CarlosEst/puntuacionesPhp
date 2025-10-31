@@ -6,6 +6,7 @@
 
     $contenedorMarcador = new Marcadores($conexion);
 
+    $contenedorMarcador->insertarDatos(1580, "hol");
     $contenedorMarcador->imprimirPuntuaciones();
 
     $conexionBBDD->cerrarConexion();

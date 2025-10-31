@@ -1,5 +1,3 @@
--- Cambio un poco el script para que solo me cree la base de datos y la tabla si no existe asi mantengo los datos anteriores 
--- y no se me ponen estos cada vez que inicializo la conexion
 CREATE DATABASE IF NOT EXISTS marcador;
 USE marcador;
 -- Tablas
