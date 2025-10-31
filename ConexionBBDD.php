@@ -40,7 +40,7 @@
             $this->cargarSql();
 
             //Me hago la conexion a la base de datos correcta
-            $this->conectarse();
+            $this->conexion = $this->conectarse();
         }
 
         /** 
@@ -102,8 +102,12 @@
             return $this->conexion;
         }
 
+        /**
+         * Cerrar la conexion a la DB
+         */
         public function cerrarConexion(){
             $this->conexion = null;
         }
+
     }
 ?>

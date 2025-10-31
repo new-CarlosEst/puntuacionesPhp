@@ -6,5 +6,7 @@
 
     $contenedorMarcador = new Marcadores($conexion);
 
+    $contenedorMarcador->imprimirPuntuaciones();
+
     $conexionBBDD->cerrarConexion();
 ?>

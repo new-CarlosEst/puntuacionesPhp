@@ -20,6 +20,8 @@
         public function __construct($conexion) {
             //Pongo lo conexion al la bbdd
             $this->conexion = $conexion;
+            //inicializo la lista
+            $this->listaMarcador = [];
 
             //Cargo los datos de la tabla topten al array
             $this->cargarDatos();
@@ -30,11 +32,16 @@
          */
         private function cargarDatos(){
             try{
-                $query = "SELECT pos, score, nick FROM topten ORDER BY pos DESC";
+                //hago la consulta y la ordeno ascendentemente
+                $query = "SELECT pos, score, nick FROM topten ORDER BY pos ASC";
                 foreach ($this->conexion->query($query) as $fila){
-                    var_dump($fila["pos"]);
-                    //$marcador = new Marcador($fila["pos"], $fila["score"], $fila["nick"]);
+                    //Los valores numericos me los devuelve como int asi que no hace falta hacer una conversion de string a int
+                    $marcador = new Marcador($fila["pos"], $fila["score"], $fila["nick"]);
+                    
+                    //Lo meto en el array
+                    $this->listaMarcador[] = $marcador;
                 }
+                
             } catch (PDOException $e){
                 echo $e;
             }
@@ -45,12 +52,12 @@
          */
         public function imprimirPuntuaciones(){
             echo "<table>";
-            echo "  <th>
-                        <td>Posicion</td>
-                        <td>Puntuacion</td>
-                        <td>Nick</td>
-                    </th>";
-            foreach ($this->listaMarcador as $clave => $valor){
+            echo "  <tr>
+                        <th>Posicion</th>
+                        <th>Puntuacion</th>
+                        <th>Nick</th>
+                    </tr>";
+            foreach ($this->listaMarcador as $valor){
                 echo "<tr>";
                 echo "<td>" . $valor->getPosicion() ."</td>";
                 echo "<td>" . $valor->getPuntuacion() . "</td>";
