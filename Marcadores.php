@@ -120,7 +120,7 @@
         }
 
         /**
-         * Funcion sacar posicion
+         * Funcion que saca la posicion en la que tiene que ir esa puntuacion
          */
         private function sacarPosicion($puntuacion){
             for($i = 0; $i < count($this->listaMarcador); $i++){

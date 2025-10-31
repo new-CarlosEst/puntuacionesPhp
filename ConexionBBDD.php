@@ -1,4 +1,36 @@
 <?php 
+
+    /* 
+    // Me hago una conexión temporal solo al servidor (sin seleccionar base de datos)
+        $conexionTemp = new PDO("mysql:host=" . $this->service, $this->user, $this->password);
+        $conexionTemp->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Nombre de la tabla principal que se crea en el .sql
+        $nombreTabla = "topten";
+
+        // --- Comprobación: solo ejecutar si la tabla aún no existe ---
+        // (buscamos la tabla en todas las bases de datos del servidor)
+        $query = $conexionTemp->query("
+            SELECT TABLE_NAME 
+            FROM information_schema.TABLES 
+            WHERE TABLE_NAME = '$nombreTabla'
+        ");
+
+        $tablaExiste = $query->rowCount() > 0;
+
+        if (!$tablaExiste) {
+            // Solo ejecuto el SQL si la tabla no existe todavía
+            $archivoSQL = __DIR__ . '/resources/marcador_v2.sql';
+
+            if (!file_exists($archivoSQL)) {
+                echo "❌ Archivo .sql no encontrado";
+            } else {
+                $contenidoSQL = file_get_contents($archivoSQL);
+                $conexionTemp->exec($contenidoSQL);
+                echo "✅ Script SQL ejecutado (primera carga)";
+            }
+        }
+    */
     //Cargo el archivo autoload.php para cargar las liberias
     require_once __DIR__ . "/vendor/autoload.php";
 
@@ -19,8 +51,6 @@
      * @param $service Servicio de la base de datos o el puerto al que se conecta
      * @param $conexion Variable donde se guarda la conexion pdo
      */
-
-
     class Conexion {
         //Si lo haces privado y estatico solo tiene
         private $user;
@@ -29,6 +59,7 @@
         private $service;
         private $conexion;
 
+        //TODO Ver como hacer que solo se me cargue el sql una vez, no cada vez que se actualize la pagina
         public function __construct() {
             //Me saco el usuario, password, db y servicio del .env
             $this->user = $_ENV["USER"];
