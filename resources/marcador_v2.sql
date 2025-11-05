@@ -1,5 +1,6 @@
 CREATE DATABASE IF NOT EXISTS marcador;
 USE marcador;
+
 -- Tablas
 CREATE TABLE IF NOT EXISTS topten (
 pos int primary key,				-- Posicion en el marcador
