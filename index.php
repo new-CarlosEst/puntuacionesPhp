@@ -11,15 +11,12 @@
     $datosGet = "---";
     $datosPost = "";
 
-    echo $_GET["nick"];
-    //Solo si le paso nick por paremetro en la url
+    //He intentado hacerlo asi pero por alguna razon cuando envio el formulario no me detecta lo que le paso con get por paremetro en la url
+    //Asi que el nick que se envia es "---" no el que paso por parametro, aunque deberia funcionar
     if (isset($_GET["nick"])){
+        echo "Ha entrado aqui? ";
         //Saco las cosas del get
         $datosGet = $_GET["nick"];
-    }
-    //Con get no me lo esa cogiendo el nick asi compruebo si me lo esta cogiendo por parametro con el post 
-    elseif (isset($_POST["nick"])){
-        $datosGet = $_POST["nick"];
     }
     
     //Si el metodo es post saco lo de post 
